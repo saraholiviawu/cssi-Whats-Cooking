@@ -2,15 +2,15 @@
 <html>
 
 <head>
-  <title>What's cookin'?</title>
+  <title>what's cookin'?</title>
   <link rel="stylesheet" href="style/welcome.css">
 <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 <body>
 
   <div class="navbar">
-    <a href="/welcome">  <i class="fas fa-home"></i> Home</a>
-    <a href="/login-please"><i class="far fa-user"></i> Log In</a>
+    <a href="/welcome.html">  <i class="fas fa-home"></i> Home</a>
+    <a href="/login-please.html"><i class="far fa-user"></i> Log In</a>
   </div>
 
     <div class="main">
@@ -18,33 +18,35 @@
       <br />
       <br />
       <!--<a href = "{{logout_link}}">Logout</a> -->
-      <h1>What's cookin?</h1>
+      <div class="header" id="myHeader">
+          <h1>what's cookin?</h1>
+      </div>
+
       <br />
-      <h3>What do you have in your fridge?</h3>
+      <h3>what do you have in your fridge?</h3>
         <form class="search" action="/results" method="POST" style="margin:auto;max-width:500px"/>
           <input type = "text" placeholder = "Search..." name = "search"/>
           <button type="submit"><i class="fas fa-search" style="color:#99ff99;"></i></button>
           <p> Please separate the ingredients with commas</p>
           </div>
   <div class="footer">
-    <p>Presented By: Team Saucy</p>  <i class="far fa-star"></i>
+    <p>Presented By: Team Saucy</p>  <i class="fas fa-fire"></i>
   </div>
-
-  <div class="main">
-    {{nickname}}
-    {{logout_url}}
-    {{logout_text}}
-    <a href = "{{logout_link}}">Logout</a>
-    <h1>What's cookin?</h1>
-    <h3>brought to you by the Saucy team</h3>
-    <br />
-    <h3>What do you have in your fridge?</h3>
-      <form class="search" action="/" method="POST" style="margin:auto;max-width:500px"/>
-        <input type = "text" placeholder = "Search..." name = "foodlist"/>
-        <button type="submit"><i class="fas fa-search" style="color:#99ff99;"></i></button>
-      </div>
   </div>
+  <script>
+  window.onscroll = function() {myFunction()};
 
+  let header = document.getElementById("myHeader");
+  let sticky = header.offsetTop;
+
+  function myFunction() {
+    if (window.pageYOffset > sticky) {
+      header.classList.add("sticky");
+    } else {
+      header.classList.remove("sticky");
+    }
+  }
+  </script>
 
 
 </body>
