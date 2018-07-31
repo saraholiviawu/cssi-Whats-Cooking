@@ -4,13 +4,20 @@
 <head>
   <title>What's cookin?</title>
 </head>
-
 <body>
+  {{nickname}}
+  {{logout_url}}
+  {{logout_text}}
+  <a href = "{{logout_link}}">Logout</a>
   <h1>What's cookin?</h1>
   <h3>brought to you by the Saucy team</h3>
-  <input type = "text" placeholder= "Search..." />
-  <button type = "button">Go!</button>
-  </div>
+  <br />
+  <h3>What do you have in your fridge?</h3>
+
+  <form action="/results" method="POST">
+    <input type = "text" placeholder = "Search..." value = "{{input_ingredients}}"/>
+    <input type="submit" value="Go!">
+  </form>
 
 </body>
 

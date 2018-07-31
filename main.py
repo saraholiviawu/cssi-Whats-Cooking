@@ -3,14 +3,34 @@ import webapp2
 from random import shuffle
 #libraries for APIs
 from google.appengine.api import urlfetch
+from google.appengine.api import users
+from google.appengine.ext import ndb
 import json
-import urllib
+import jinja2
+import os
+
+jinja_current_directory  = jinja2.Environment(
+    loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
+    extensions=['jinja2.ext.autoescape'],
+    autoescape=True)
+
+# class Event(ndb.Model):
+#     organizer = ndb.StringProperty(required=True)
+#     title = ndb.StringProperty(required=True)
 
 class WelcomePage(webapp2.RequestHandler):
 
     def get(self):
+        #login
+        logout_link = users.create_logout_url('/')
+        start_template = jinja_current_directory.get_template('templates/welcome.html')
+        self.response.write(start_template.render({
+            'logout_link': logout_link
+        }))
+
+        #recipe API
         global APP_ID
-    
+
         urlfetch.set_default_fetch_deadline(60) #this sets the deadline
         result = urlfetch.fetch( #this goes to the endpoint and grabs the json
               url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=apples%2Cflour%2Csugar&number=5&ranking=1",
@@ -41,18 +61,58 @@ class WelcomePage(webapp2.RequestHandler):
         # recipes_as_json = json.loads(search_response)
         self.response.write(recipe_search_info.content)
     def post(self):
-        # trivia_endpoint_url = "https://opentdb.com/api.php?amount=1&category=10&difficulty=easy&type=multiple"
-        # trivia_response= urlfetch.fetch(trivia_endpoint_url).content
-        # trivia_as_json = json.loads(trivia_response)
-        # first_result = trivia_as_json['results'][0]
-        # trivia_question = first_result['question']
-        # correct_answer = first_result['correct_answer']
-        # incorrect_answers = first_result['incorrect_answers']
-        self.response.write(correct_answer)
+        #continuation of login through post method
+        user = users.get_current_user()
+        if user:
+            nickname = user.nickname()
+            logout_url = users.create_logout_url('/')
+            logout_text = "Logout"
+            # greeting = 'Welcome, %s! (<a href="%s">sign out</a>)'.format(
+                # nickname, logout_url)
+            # add_template = jinja_current_directory.get_template('templates/welcome.html')
+            # self.response.write(add_template.render({'templates': templates}))
+            # self.response.write(greeting)
+        else:
+            login_prompt_template = jinja_current_directory.get_template('templates/login-please.html')
+            self.response.write(login_prompt_template.render({
+                'login_link': users.create_login_url('/')
+                }))
+        template_vars = {
+            'nickname': nickname,
+            'logout_url': logout_url,
+            'logout_text': logout_text,
+        }
+        my_template = jinja_current_directory.get_template('/')
+        self.response.write(my_template.render(template_vars))
 
+        template_vars = {
+            'input_ingredients': self.request.get('input_ingredients'),
+        }
 
+class ResultsPage(webapp2.RequestHandler):
 
+    def post(self):
+        template_vars = {
+            'input_ingredients': self.request.get('input_ingredients'),
+        }
+        results_template = jinja_current_directory.get_template('templates/results.html')
+        self.response.write(results_template.render(template_vars))
+
+class RecipeInstructionsPage(webapp2.RequestHandler):
+    def get(self):
+        recipe_instructions_template = jinja_current_directory.get_template('templates/recipe-instructions.html')
+        self.response.write(recipe_instructions_template.render())
+
+class LoginPlease(webapp2.RequestHandler):
+    def get(self):
+        login_prompt_template = jinja_current_directory.get_template('templates/login-please.html')
+        self.response.write(login_prompt_template.render({
+            'login_link': users.create_login_url('/')
+            }))
 
 app = webapp2.WSGIApplication([
     ('/', WelcomePage),
+    ('/results', ResultsPage),
+    ('/RecipeInstructionsPage', RecipeInstructionsPage),
+    ('/LoginPlease', LoginPlease)
 ], debug=True)
