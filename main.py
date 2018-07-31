@@ -44,9 +44,10 @@ class WelcomePage(webapp2.RequestHandler):
         urlfetch.set_default_fetch_deadline(60) #this sets the deadline
         result = urlfetch.fetch( #this goes to the endpoint and grabs the json
               # url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
-              url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=cheese&number=5&ranking=1",
+              url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=cheese&number=5&ranking=2",
               headers={
-                "X-Mashape-Key": "",
+                "X-Mashape-Key": "DomnZY3cOZmshkfgl4Z3KOudQ0Vnp1S2NaKjsnSZUDpWRwTxBz",
+                "X-Mashape-Host": "spoonacular-crecipe-food-nutrition-v1.p.mashape.com",
               },)
 
         recipe_list = json.loads(result.content)
@@ -88,15 +89,14 @@ class ResultsPage(webapp2.RequestHandler):
                 logout_text = "Logout"
                 #recipe API
                 global APP_ID
-                APP_ID = "6c9dcc56"
+                APP_ID = ""
                 global APP_KEY
-                APP_KEY = "2171ca578b523dffd8daf196002342e2"
+                APP_KEY = ""
                 urlfetch.set_default_fetch_deadline(60) #this sets the deadline
                 result = urlfetch.fetch( #this goes to the endpoint and grabs the json
                       url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
                       headers={
-                        "X-Mashape-Key": "DomnZY3cOZmshkfgl4Z3KOudQ0Vnp1S2NaKjsnSZUDpWRwTxBz",
-                        "X-Mashape-Host": "spoonacular-crecipe-food-nutrition-v1.p.mashape.com",
+                        "X-Mashape-Key": "",
                       },)
 
                 recipe_list = json.loads(result.content)
