@@ -45,17 +45,18 @@ class WelcomePage(webapp2.RequestHandler):
                 'login_link': users.create_login_url('/')
                 }))
 
-        self.response.write(
-            'hello'.format(greeting))
-        # self.response.write(correct_answer)
-        #
-        # welcome_template = JINJA_ENVIRONMENT.get_template('templates/welcome.html')
-        # self.response.write(welcome_template.render(template_vars))
+        template_vars = {
+            'input_ingredients': self.request.get('input_ingredients'),
+        }
 
 class ResultsPage(webapp2.RequestHandler):
-    def get(self):
+
+    def post(self):
+        template_vars = {
+            'input_ingredients': self.request.get('input_ingredients'),
+        }
         results_template = jinja_current_directory.get_template('templates/results.html')
-        self.response.write(results_template.render())
+        self.response.write(results_template.render(template_vars))
 
 class RecipeInstructionsPage(webapp2.RequestHandler):
     def get(self):
