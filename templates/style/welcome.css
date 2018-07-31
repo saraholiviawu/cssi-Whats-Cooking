@@ -1,0 +1,78 @@
+body{
+  font-family: Helvetica;
+  margin: 0;
+  text-align: center;
+
+}
+* form{
+  box-sizing: border-box;
+}
+form.search input[type=text]{
+  padding: 10px;
+  font-size: 17px;
+  border: 1px solid grey;
+  float: left;
+  width: 80%;
+  background: #f1f1f1;
+}
+ form.search button{
+   float: left;
+   width 20%;
+   padding: 10px;
+   background #2196F3;
+   color: white;
+   font-size: 17px;
+   border 1px solid grey;
+   border-left: none;
+   cursors: pointer;
+ }
+form.search button:hover{
+  boackground: #0b7dda;
+}
+form.search::after{
+  content:"";
+  clear:both;
+  display:table;
+}
+.fa-search:before{
+  content: "\f002";
+}
+.navbar{
+overflow: hidden;
+background-color: #333;
+position: fixed;
+
+top: 0;
+width: 100%;
+
+}
+.navbar a {
+  float: left;
+  display:block;
+
+  color: white;
+  text-align: center;
+  padding: 14px 16px;
+
+  text-decoration: none;
+  font-size: 17px;
+}
+.navbar a:hover{
+  background: #ddd;
+  color: black;
+}
+.main{
+  padding: 16px;
+  margin-top: 30px;
+  height: 1500px;
+}
+
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width:100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
