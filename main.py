@@ -16,10 +16,6 @@ jinja_current_directory  = jinja2.Environment(
 # class Event(ndb.Model):
 #     organizer = ndb.StringProperty(required=True)
 #     title = ndb.StringProperty(required=True)
-#
-class Event(ndb.Model):
-    organizer = ndb.StringProperty(required=True)
-    title = ndb.StringProperty(required=True)
 
 class WelcomePage(webapp2.RequestHandler):
 
@@ -35,15 +31,24 @@ class WelcomePage(webapp2.RequestHandler):
         if user:
             nickname = user.nickname()
             logout_url = users.create_logout_url('/')
-            greeting = 'Welcome, %s! (<a href="%s">sign out</a>)'.format(
-                nickname, logout_url)
-            add_template = jinja_current_directory.get_template('templates/welcome.html')
-            self.response.write(add_template.render({'templates': templates}))
+            logout_text = "Logout"
+            # greeting = 'Welcome, %s! (<a href="%s">sign out</a>)'.format(
+                # nickname, logout_url)
+            # add_template = jinja_current_directory.get_template('templates/welcome.html')
+            # self.response.write(add_template.render({'templates': templates}))
+            # self.response.write(greeting)
         else:
             login_prompt_template = jinja_current_directory.get_template('templates/login-please.html')
             self.response.write(login_prompt_template.render({
                 'login_link': users.create_login_url('/')
                 }))
+        template_vars = {
+            'nickname': nickname,
+            'logout_url': logout_url,
+            'logout_text': logout_text,
+        }
+        my_template = jinja_current_directory.get_template('/')
+        self.response.write(my_template.render(template_vars))
 
         template_vars = {
             'input_ingredients': self.request.get('input_ingredients'),
