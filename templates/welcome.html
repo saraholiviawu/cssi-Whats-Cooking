@@ -3,21 +3,30 @@
 
 <head>
   <title>What's cookin?</title>
+  <link rel="stylesheet" href="style/welcome.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
 </head>
 <body>
-  {{nickname}}
-  {{logout_url}}
-  {{logout_text}}
-  <a href = "{{logout_link}}">Logout</a>
-  <h1>What's cookin?</h1>
-  <h3>brought to you by the Saucy team</h3>
-  <br />
-  <h3>What do you have in your fridge?</h3>
 
-  <form action="/" method="POST">
-    <input type = "text" name="foodlist" placeholder = "Search..." value = "{{input_ingredients}}"/>
-    <input type="submit" value="Go!">
-  </form>
+  <div class="navbar">
+    <a href="/welcome"> Home </a>
+    <a href="/login-pleas"> Log In</a>
+  </div>
+  <div class="main">
+    {{nickname}}
+    {{logout_url}}
+    {{logout_text}}
+    <a href = "{{logout_link}}">Logout</a>
+    <h1>What's cookin?</h1>
+    <h3>brought to you by the Saucy team</h3>
+    <br />
+    <h3>What do you have in your fridge?</h3>
+      <form class="search" action="/" method="POST" style="margin:auto;max-width:500px"/>
+        <input type = "text" placeholder = "Search..." name = "foodlist"/>
+        <button type="submit"><i class="fas fa-search" style="color:#99ff99;"></i></button>
+      </div>
+  </div>
+
 
 </body>
 
