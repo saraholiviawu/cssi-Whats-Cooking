@@ -4,6 +4,11 @@ body{
   text-align: center;
 
 }
+h1{
+  color: #66ff66;
+  text-shadow: 2px 2px gray;
+  font-size: 45px;
+}
 * form{
   box-sizing: border-box;
 }
@@ -50,7 +55,8 @@ width: 100%;
   float: left;
   display:block;
 
-  color: white;
+  color: #66ff66;
+
   text-align: center;
   padding: 14px 16px;
 
