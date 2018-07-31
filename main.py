@@ -95,9 +95,10 @@ class ResultsPage(webapp2.RequestHandler):
                 APP_KEY = ""
                 urlfetch.set_default_fetch_deadline(60) #this sets the deadline
                 result = urlfetch.fetch( #this goes to the endpoint and grabs the json
-                      url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=2",
+
+                      url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
                       headers={
-                        "X-Mashape-Key": "",
+
                       },)
 
                 recipe_list = json.loads(result.content)
