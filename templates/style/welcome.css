@@ -1,6 +1,7 @@
 body{
   font-family: Helvetica;
   margin: 0;
+  text-align: center;
 }
 * form{
   box-sizing: border-box;
@@ -39,15 +40,15 @@ form.search::after{
 overflow: hidden;
 background-color: #333;
 position: fixed;
-top: 0
-width: 100%
+top: 0;
+width: 100%;
 }
 .navbar a {
   float: left;
   display:block;
-  color: green;
+  color: white;
   text-align: center;
-  padding: 14 px 16 px;
+  padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
 }
@@ -59,4 +60,13 @@ width: 100%
   padding: 16px;
   margin-top: 30px;
   height: 1500px;
+}
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width:100%;
+  background-color: black;
+  color: white;
+  text-align: center;
 }
