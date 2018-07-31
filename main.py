@@ -42,13 +42,15 @@ class WelcomePage(webapp2.RequestHandler):
         global APP_KEY
         APP_KEY = ""
         urlfetch.set_default_fetch_deadline(60) #this sets the deadline
+        url=("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=2")
+        print url
         result = urlfetch.fetch( #this goes to the endpoint and grabs the json
               # url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
-              url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=cheese&number=5&ranking=2",
+              url,
               headers={
-                "X-Mashape-Key": "DomnZY3cOZmshkfgl4Z3KOudQ0Vnp1S2NaKjsnSZUDpWRwTxBz",
-                "X-Mashape-Host": "spoonacular-crecipe-food-nutrition-v1.p.mashape.com",
+
               },)
+        print url
 
         recipe_list = json.loads(result.content)
         #print recipe_list #parses json
@@ -96,7 +98,7 @@ class ResultsPage(webapp2.RequestHandler):
                 result = urlfetch.fetch( #this goes to the endpoint and grabs the json
                       url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
                       headers={
-                        "X-Mashape-Key": "",
+
                       },)
 
                 recipe_list = json.loads(result.content)
