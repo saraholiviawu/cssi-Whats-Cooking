@@ -16,7 +16,7 @@ jinja_current_directory  = jinja2.Environment(
 
 
 class WelcomePage(webapp2.RequestHandler):
-    def get (self):
+    def get(self):
         welcome_template = jinja_current_directory.get_template('templates/welcome.html')
         self.response.write(welcome_template.render({'login_url': users.create_login_url('/main')}))
 
@@ -33,8 +33,8 @@ class MainPage(webapp2.RequestHandler):
             }
         else:
             self.redirect('/welcome')
-        main_template = jinja_current_directory.get_template('templates/main.html')
-        self.response.write(main_template.render(template_var))
+        main_template = jinja_current_directory.get_template('main/welcome.html')
+        self.response.write(welcome_template.render(template_var))
 
         #recipe API-----------------
     #     global APP_ID
@@ -107,13 +107,12 @@ class ResultsPage(webapp2.RequestHandler):
             self.response.write("<img src=" + all_recipe_images[tempval] + "> <br> " + key.replace("%20", " ") + ". Find more information at: " + final_recipe_dict[key])
             tempval += 1
 
-        my_template = jinja_current_directory.get_template('templates/results.html')
-        # self.response.write(my_template.render(template_vars))
-
         template_vars = {
             'input_ingredient': self.request.get('foodlist'),
         }
 
+        my_template = jinja_current_directory.get_template('templates/results.html')
+        self.response.write(my_template.render(template_vars))
 
 
 class ResultsPage(webapp2.RequestHandler):
@@ -145,15 +144,15 @@ class ResultsPage(webapp2.RequestHandler):
                     print recipe
                     recipe_search_info = urlfetch.fetch("https://api.edamam.com/search?q=" + recipe + "&app_id=" + APP_ID +"&app_key=" + APP_KEY + "&to=1")
                     print recipe_search_info.content
-                 
+
                 for i in recipe_search_info.content:
                     self.response.write("<img src = " + i[uri] + "/> <br> " + i["q"] + ". Find more information at: " + i["url"])
 
-            template_vars = {
-                'input_ingredients': self.request.get('foodlist'),
-            }
-            results_template = jinja_current_directory.get_template('templates/results.html')
-            self.response.write(results_template.render(template_vars))
+                template_vars = {
+                    'input_ingredients': self.request.get('foodlist'),
+                }
+                results_template = jinja_current_directory.get_template('templates/results.html')
+                self.response.write(results_template.render(template_vars))
 
 class RecipeInstructionsPage(webapp2.RequestHandler):
     def get(self):
