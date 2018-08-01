@@ -9,6 +9,7 @@ import json
 import jinja2
 import os
 import urllib
+import user_models
 
 jinja_current_directory  = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -24,6 +25,32 @@ class WelcomePage(webapp2.RequestHandler):
     def get(self):
         welcome_template = jinja_current_directory.get_template('templates/welcome.html')
         self.response.write(welcome_template.render({'login_url': users.create_login_url('/main')}))
+
+class MainPage(webapp2.RequestHandler):
+    def get(self):
+        template_var = {}
+        user = users.get_current_user()
+        if user:
+            nickname = user.nickname()
+            user_id = str(user.user_id())
+            logout_url = users.create_logout_url('/')
+            template_var = {
+                "logout_url": logout_url,
+                "nickname": nickname,
+            }
+            #creating accounts for users
+            find_user_list = user_models.User.query().filter(user_models.User.user_id == user_id).fetch()
+            if len(find_user_list) > 0:
+                print "user found"
+            else:
+                user_models.User(user_id=user_id, nickname=nickname).put()
+                print "user not found"
+
+        else:
+            self.redirect('/welcome')
+        main_template = jinja_current_directory.get_template('templates/main.html')
+        self.response.write(main_template.render(template_var))
+
 
     def post(self):
         #recipe API
@@ -74,6 +101,7 @@ class WelcomePage(webapp2.RequestHandler):
         welcome_template = jinja_current_directory.get_template('templates/results.html')
         self.response.write(welcome_template.render(template_vars))
 
+
 class MainPage(webapp2.RequestHandler):
       def get(self):
         template_var = {}
@@ -118,6 +146,7 @@ class MainPage(webapp2.RequestHandler):
     #     template_vars = {
     #         'input_ingredients': self.request.get('input_ingredients'),
     #     }
+
 app = webapp2.WSGIApplication([
     ('/', WelcomePage),
     ('/main', MainPage),
