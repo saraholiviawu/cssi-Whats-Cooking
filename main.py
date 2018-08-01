@@ -24,9 +24,7 @@ class WelcomePage(webapp2.RequestHandler):
     def post(self):
         #recipe API
         global APP_ID
-        APP_ID = ""
-        global APP_KEY
-        APP_KEY = ""
+        
         urlfetch.set_default_fetch_deadline(60) #this sets the deadline
         url=("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist").replace(" ", "")) + "&number=5&ranking=2")
         print url
@@ -34,7 +32,7 @@ class WelcomePage(webapp2.RequestHandler):
               # url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
               url,
               headers={
-                "X-Mashape-Key": "",
+
               },)
         print url
 
@@ -175,7 +173,7 @@ class ResultsPage(webapp2.RequestHandler):
                       url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
                       headers={
                         "X-Mashape-Key": "",
-                        "X-Mashape-Host": "-crecipe--nutrition-v1.p.mashape.com",
+                        "X-Mashape-Host": "",
                       },)
 
                 recipe_list = json.loads(result.content)
@@ -199,6 +197,7 @@ class ResultsPage(webapp2.RequestHandler):
                 }
                 results_template = jinja_current_directory.get_template('templates/results.html')
                 self.response.write(results_template.render(template_vars))
+
 
 class RecipeInstructionsPage(webapp2.RequestHandler):
     def get(self):
