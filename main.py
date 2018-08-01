@@ -102,21 +102,6 @@ class MainPage(webapp2.RequestHandler):
         self.response.write(welcome_template.render(template_vars))
 
 
-class MainPage(webapp2.RequestHandler):
-      def get(self):
-        template_var = {}
-        user = users.get_current_user()
-        if user:
-            nickname = user.nickname()
-            logout_url = users.create_logout_url('/')
-            template_var = {
-                "logout_url": logout_url,
-                "nickname": nickname
-            }
-        else:
-            self.redirect('/welcome')
-        main_template = jinja_current_directory.get_template('templates/main.html')
-        self.response.write(main_template.render(template_var))
 
         #recipe API-----------------
     #     global APP_ID
