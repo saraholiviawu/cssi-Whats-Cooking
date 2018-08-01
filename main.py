@@ -26,7 +26,7 @@ class WelcomePage(webapp2.RequestHandler):
         global APP_ID
         APP_ID = ""
         global APP_KEY
-        APP_KEY = ""
+        APP_KEY = "84103e81ef614ae430c3bc458d36ff16"
         urlfetch.set_default_fetch_deadline(60) #this sets the deadline
         url=("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist").replace(" ", "")) + "&number=5&ranking=2")
         print url
@@ -34,8 +34,8 @@ class WelcomePage(webapp2.RequestHandler):
               # url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
               url,
               headers={
-                "X-Mashape-Key": "",
-                "X-Mashape-Host": "",
+                "X-Mashape-Key": "DomnZY3cOZmshkfgl4Z3KOudQ0Vnp1S2NaKjsnSZUDpWRwTxBz",
+                "X-Mashape-Host": "spoonacular-crecipe-food-nutrition-v1.p.mashape.com",
               },)
         print url
 
