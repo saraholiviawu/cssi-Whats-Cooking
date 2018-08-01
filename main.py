@@ -17,7 +17,7 @@ jinja_current_directory  = jinja2.Environment(
 
 
 class WelcomePage(webapp2.RequestHandler):
-    def get (self):
+    def get(self):
         welcome_template = jinja_current_directory.get_template('templates/welcome.html')
         self.response.write(welcome_template.render({'login_url': users.create_login_url('/main')}))
     def post(self):
@@ -84,8 +84,8 @@ class MainPage(webapp2.RequestHandler):
             }
         else:
             self.redirect('/welcome')
-        main_template = jinja_current_directory.get_template('templates/main.html')
-        self.response.write(main_template.render(template_var))
+        main_template = jinja_current_directory.get_template('main/welcome.html')
+        self.response.write(welcome_template.render(template_var))
 
         #recipe API-----------------
     #     global APP_ID
