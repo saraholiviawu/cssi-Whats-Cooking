@@ -123,9 +123,9 @@ class ResultsPage(webapp2.RequestHandler):
     def post(self):
         #recipe API
         global APP_ID
-        APP_ID = "6c9dcc56"
+        APP_ID = ""
         global APP_KEY
-        APP_KEY = "2171ca578b523dffd8daf196002342e2"
+        APP_KEY = ""
         urlfetch.set_default_fetch_deadline(60) #this sets the deadline
         url=("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist").replace(" ", "")) + "&number=5&ranking=2")
         print url
@@ -134,8 +134,7 @@ class ResultsPage(webapp2.RequestHandler):
               url,
               headers={
 <<<<<<< HEAD
-                "X-Mashape-Key": "DomnZY3cOZmshkfgl4Z3KOudQ0Vnp1S2NaKjsnSZUDpWRwTxBz",
-                "X-Mashape-Host": "spoonacular-crecipe-food-nutrition-v1.p.mashape.com",
+                "X-Mashape-Key": "",
 =======
                 "X-Mashape-Key": "",
 >>>>>>> 9bb9e3faa470d64de24a17128bdb3114d80269d3
