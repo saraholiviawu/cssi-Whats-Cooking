@@ -124,6 +124,5 @@ class RecipeInstructionsPage(webapp2.RequestHandler):
 app = webapp2.WSGIApplication([
     ('/', WelcomePage),
     ('/main', MainPage),
-    ('/results', ResultsPage),
     ('/RecipeInstructionsPage', RecipeInstructionsPage),
 ], debug=True)
