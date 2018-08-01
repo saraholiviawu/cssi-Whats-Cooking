@@ -5,7 +5,7 @@
   <title>What's cookin?</title>
   <link rel="stylesheet" href="style/welcome.css"  />
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
-  <content="width=device-width, initial-scale=1">
+  <meta name="viewpoint" content="width=device-width, initial-scale=1">
 </head>
 
 <body>
@@ -27,15 +27,21 @@
       <!--<input type = "text" placeholder= "{{input_ingredients}}" /> -->
       <!-- <h2 id="input_"> {{line1}} </h2> -->
       {% for recipe in recipes %}
-      <div class="card">
-        <img src="{{recipe['img_url']}}" style="width:80%" />
-        <div class ="container">
-          <h4> {{recipe['name']}}</h4>
-          <p>{{recipe['recipe_url']}}</p>
+    <div class="row">
+      <div class="column">
+        <div class="card">
+          <a href="{{recipe['recipe_url']}}"><img src="{{recipe['img_url']}}" style="width:100%" /> </a>
+          <div class ="container">
+            <h4> {{recipe['name']}}</h4>
+          </div>
         </div>
       </div>
+    </div>
       {% endfor %}
     </div>
+    <br />
+    <br />
+    <br />
     <div class='footer'>
       <p>Presented By: Team Saucy</p>  <i class="fas fa-fire"></i>
     </div>
