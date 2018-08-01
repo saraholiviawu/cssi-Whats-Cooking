@@ -6,15 +6,9 @@ handlers:
 - url: /style
   static_dir: templates/style
 
-<<<<<<< HEAD
-=======
-
->>>>>>> 9bb9e3faa470d64de24a17128bdb3114d80269d3
 - url: /.*
   script: main.app
   login: optional
-- url: /stylesheet
-  static_dir: templates/style
 
 libraries:
 - name: jinja2
