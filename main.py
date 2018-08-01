@@ -20,13 +20,8 @@ class WelcomePage(webapp2.RequestHandler):
     def get(self):
         welcome_template = jinja_current_directory.get_template('templates/welcome.html')
         self.response.write(welcome_template.render({'login_url': users.create_login_url('/main')}))
+
     def post(self):
-        #continuation of login through post method
-        # user = users.get_current_user()
-        #
-        # nickname = user.nickname()
-        # logout_url = users.create_logout_url('/')
-        # logout_text = "Logout"
         #recipe API
         global APP_ID
         APP_ID = ""
@@ -66,12 +61,11 @@ class WelcomePage(webapp2.RequestHandler):
             self.response.write("<img src=" + all_recipe_images[tempval] + "> <br> " + key.replace("%20", " ") + ". Find more information at: " + final_recipe_dict[key])
             tempval += 1
 
-        my_template = jinja_current_directory.get_template('templates/results.html')
-        # self.response.write(my_template.render(template_vars))
-
         template_vars = {
             'input_ingredient': self.request.get('foodlist'),
         }
+        welcome_template = jinja_current_directory.get_template('templates/welcome.html')
+        self.response.write(welcome_template.render(template_vars))
 
 class MainPage(webapp2.RequestHandler):
       def get(self):
@@ -86,8 +80,8 @@ class MainPage(webapp2.RequestHandler):
             }
         else:
             self.redirect('/welcome')
-        main_template = jinja_current_directory.get_template('main/welcome.html')
-        self.response.write(welcome_template.render(template_var))
+        main_template = jinja_current_directory.get_template('templates/main.html')
+        self.response.write(main_template.render(template_var))
 
         #recipe API-----------------
     #     global APP_ID
@@ -133,11 +127,7 @@ class ResultsPage(webapp2.RequestHandler):
               # url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
               url,
               headers={
-<<<<<<< HEAD
                 "X-Mashape-Key": "",
-=======
-                "X-Mashape-Key": "",
->>>>>>> 9bb9e3faa470d64de24a17128bdb3114d80269d3
               },)
         print url
         recipe_list = json.loads(result.content)
