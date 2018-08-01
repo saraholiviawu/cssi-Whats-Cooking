@@ -28,9 +28,83 @@
           <button type="submit"><i class="fas fa-search" style="color:#99ff99;"></i></button>
           <p> Please separate the ingredients with commas</p>
       </div>
+
+  <div class="slideshow-container">
+    <div class="mySlides fade">
+      <div class="numbertext">1 / 6</div>
+      <img src="https://i.ytimg.com/vi/Tl4eSYrcEDI/hqdefault.jpg" />
+      <div class="text"> Food</div>
+    </div>
+
+    <div class="mySlides fade">
+      <div class="numbertext">2 / 6</div>
+      <img src="https://myfoodbook.com.au/sites/default/files/styles/single_recipe/public/recipe_photo/P5015f7ca_0.jpg" >
+      <div class="text">Caption Two</div>
+    </div>
+
+    <div class="mySlides fade">
+      <div class="numbertext">3 / 6</div>
+      <img src="https://assets.epicurious.com/photos/578d208a98e0fc8755001470/2:1/w_1260%2Ch_630/deviled-eggs.jpg" >
+      <div class="text">Caption Three</div>
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">4 / 6</div>
+      <img src="https://imagesvc.timeincapp.com/v3/mm/image?url=https%3A%2F%2Fcdn-image.foodandwine.com%2Fsites%2Fdefault%2Ffiles%2FHD-200809-r-farfalle-zucchini.jpg&w=700&q=85" >
+      <div class="text">Caption Three</div>
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">5 / 6</div>
+      <img src="https://www.tasteaholics.com/wp-content/uploads/2016/01/Sesame-chicken.jpg" >
+      <div class="text">Caption Three</div>
+    </div>
+    <div class="mySlides fade">
+      <div class="numbertext">6 / 6</div>
+      <img src="https://cdn.diys.com/wp-content/uploads/2016/08/Vienna-schnitzel-with-cherry-tomato-sauce.jpeg">
+      <div class="text">Caption Three</div>
+    </div>
+    <a class="prev" onclick="plusSlides(-1)">&#10094;</a>
+    <a class="next" onclick="plusSlides(1)">&#10095;</a>
+  </div>
+  <div style="text-align:center">
+    <span class="dot" onclick="currentSlide(1)"></span>
+    <span class="dot" onclick="currentSlide(2)"></span>
+    <span class="dot" onclick="currentSlide(3)"></span>
+    <span class="dot" onclick="currentSlide(4)"></span>
+    <span class="dot" onclick="currentSlide(5)"></span>
+    <span class="dot" onclick="currentSlide(6)"></span>
+ </div>
   <div class="footer">
     <p>Presented By: Team Saucy</p>  <i class="fas fa-fire"></i>
   </div>
+  <script>
+var slideIndex = 1;
+showSlides(slideIndex);
+
+function plusSlides(n) {
+  showSlides(slideIndex += n);
+}
+
+function currentSlide(n) {
+  showSlides(slideIndex = n);
+}
+
+function showSlides(n) {
+  let i;
+  let slides = document.getElementsByClassName("mySlides");
+  let dots = document.getElementsByClassName("dot");
+  if (n > slides.length) {slideIndex = 1}
+  if (n < 1) {slideIndex = slides.length}
+  for (i = 0; i < slides.length; i++) {
+      slides[i].style.display = "none";
+  }
+  for (i = 0; i < dots.length; i++) {
+      dots[i].className = dots[i].className.replace(" active", "");
+  }
+  slides[slideIndex-1].style.display = "block";
+  dots[slideIndex-1].className += " active";
+}
+</script>
+
 </body>
 
 </html>
