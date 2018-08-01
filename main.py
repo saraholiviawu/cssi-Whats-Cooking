@@ -28,6 +28,8 @@ class WelcomePage(webapp2.RequestHandler):
     def post(self):
         self.redirect("/main")
 
+
+
 class MainPage(webapp2.RequestHandler):
     def get(self):
         template_var = {}
@@ -38,22 +40,17 @@ class MainPage(webapp2.RequestHandler):
             logout_url = users.create_logout_url('/')
             template_var = {
                 "logout_url": logout_url,
-                "nickname": nickname,
+                "nickname": nickname
             }
-            #creating accounts for users
-            find_user_list = user_models.User.query().filter(user_models.User.user_id == user_id).fetch()
-            if len(find_user_list) > 0:
-                print "user found"
-            else:
-                user_models.User(user_id=user_id, nickname=nickname).put()
-                print "user not found"
-
+            # if (user_models.User.query().filter(user_models.User.nickname == nickname).fetch()[0] == nickname):
+            #     pass
+            # else: WIP MAKING SURE YOU CANT REGISTER TWICE BC RN YOU CAN
+            global current_user_key
+            current_user_key = user_models.User(user_id=user_id, nickname=nickname).put()
         else:
             self.redirect('/welcome')
         main_template = jinja_current_directory.get_template('templates/main.html')
         self.response.write(main_template.render(template_var))
-
-
     def post(self):
         #recipe API
         global APP_ID
@@ -107,6 +104,7 @@ class FavoritesPage(webapp2.RequestHandler):
     def get(self):
         recipe_instructions_template = jinja_current_directory.get_template('templates/recipe-instructions.html')
         self.response.write(recipe_instructions_template.render())
+
     def post(self):
         user_model_key = user_models.Recipe(
             title=self.request.get("title"), image=self.request.get("image"),
