@@ -9,6 +9,7 @@ import json
 import jinja2
 import os
 import urllib
+import user_models
 
 jinja_current_directory  = jinja2.Environment(
     loader=jinja2.FileSystemLoader(os.path.dirname(__file__)),
@@ -78,11 +79,16 @@ class MainPage(webapp2.RequestHandler):
         user = users.get_current_user()
         if user:
             nickname = user.nickname()
+            user_id = str(user.user_id())
             logout_url = users.create_logout_url('/')
             template_var = {
                 "logout_url": logout_url,
                 "nickname": nickname
             }
+            # if (user_models.User.query().filter(user_models.User.nickname == nickname).fetch()[0] == nickname):
+            #     pass
+            # else: WIP MAKING SURE YOU CANT REGISTER TWICE BC RN YOU CAN
+            user_models.User(user_id=user_id, nickname=nickname).put()
         else:
             self.redirect('/welcome')
         main_template = jinja_current_directory.get_template('templates/main.html')
