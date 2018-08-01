@@ -48,16 +48,20 @@ class WelcomePage(webapp2.RequestHandler):
               # url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
               url,
               headers={
+                "X-Mashape-Key": "",
               },)
         print url
 
         recipe_list = json.loads(result.content)
         #print recipe_list #parses json
         all_recipe_names = []
+        all_recipe_images = []
         for recipenames in recipe_list:
             all_recipe_names.append(recipenames["title"])
+            all_recipe_images.append(recipenames["image"])
         #print all_recipe_names[0]
         final_recipe_dict = {}
+
         for recipe in all_recipe_names:
             recipe = urllib.quote(recipe)
         #    print recipe
@@ -66,14 +70,16 @@ class WelcomePage(webapp2.RequestHandler):
             final_recipe_dict[recipe] = json.loads(recipe_search_info.content)["hits"][0]["recipe"]["url"]
 
 
+        tempval = 0
         for key in final_recipe_dict:
-            self.response.write("<br> " + key.replace("%20", " ") + ". Find more information at: " + final_recipe_dict[key])
+            self.response.write("<img src=" + all_recipe_images[tempval] + "> <br> " + key.replace("%20", " ") + ". Find more information at: " + final_recipe_dict[key])
+            tempval += 1
 
         my_template = jinja_current_directory.get_template('templates/results.html')
         # self.response.write(my_template.render(template_vars))
 
         template_vars = {
-            'input_ingredients': self.request.get('foodlist'),
+            'input_ingredient': self.request.get('foodlist'),
         }
 
 
@@ -98,7 +104,8 @@ class ResultsPage(webapp2.RequestHandler):
 
                       url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
                       headers={
-
+                        "X-Mashape-Key": "",
+                        "X-Mashape-Host": "",
                       },)
 
                 recipe_list = json.loads(result.content)
@@ -124,7 +131,7 @@ class ResultsPage(webapp2.RequestHandler):
                 # print search_response
                 # recipes_as_json = json.loads(search_response)
                 for i in recipe_search_info.content:
-                    self.response.write("<img src = " + i[uri] + "> <br> " + i["q"] + ". Find more information at: " + i["url"])
+                    self.response.write("<img src = " + i[uri] + "/> <br> " + i["q"] + ". Find more information at: " + i["url"])
                 #self.response.write(recipe_search_info.content[q])
                 # greeting = 'Welcome, %s! (<a href="%s">sign out</a>)'.format(
                     # nickname, logout_url)
