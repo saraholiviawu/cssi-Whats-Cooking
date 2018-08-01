@@ -3,6 +3,10 @@ api_version: 1
 threadsafe: true
 
 handlers:
+- url: /style
+  static_dir: templates/style
+
+
 - url: /.*
   script: main.app
   login: optional
