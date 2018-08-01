@@ -1,11 +1,46 @@
 .card{
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  transition: 0.3s
-  width: 40%
+  transition: 0.3s;
+  width: 100px;
 }
 .card: hover{
   box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
 }
 .container{
   padding: 2px 16px;
+}
+.navbar{
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.navbar a {
+  float: left;
+  display:block;
+  color: #66ff66;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+  font-family: Helvetica;
+}
+.navbar a:hover{
+  background: #ddd;
+  color: black;
+}
+.footer{
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width:100%;
+  background-color: black;
+  color: white;
+  text-align: center;
+}
+.main{
+  padding: 16px;
+  margin-top: 30px;
+  height: 1500px;
 }

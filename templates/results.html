@@ -3,25 +3,42 @@
 
 <head>
   <title>What's cookin?</title>
-  <link rel="stylesheet" href="style/results.css"  />
+  <link rel="stylesheet" href="style/welcome.css"  />
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
   <content="width=device-width, initial-scale=1">
 </head>
 
 <body>
-  <h1>What's cookin?</h1>
-  <br />
-    <input type = "text" placeholder= "{{input_ingredients}}" />
-    <!-- <h2 id="input_"> {{line1}} </h2> -->
-    <input type="submit" value="Go!">
-    <div class="card">
-      <img src="" style="width:100%" />
-      <div class ="container">
-        <h4> asdfg</h4>
-        <p> asdfg</p>
-      </div>
-    </div>
+  <div class="navbar">
+    <a href="/main">  <i class="fas fa-home"></i> Home</a>
+    <a href="{{logout_url}}"> <i class="far fa-user-circle"></i>  Log Out</a>
   </div>
+    <h1>What's cookin?</h1>
+    <br />
+    <div class="main">
 
+
+      <h3>What do you have in your fridge?</h3>
+        <form class="search" action="/" method="POST" style="margin:auto;max-width:500px"/>
+          <input type = "text" placeholder = "Search..." name = "foodlist"/>
+          <button type="submit"><i class="fas fa-search" style="color:#99ff99;"></i></button>
+          <p> Please separate the ingredients with commas</p>
+      </div>
+      <!--<input type = "text" placeholder= "{{input_ingredients}}" /> -->
+      <!-- <h2 id="input_"> {{line1}} </h2> -->
+      {% for recipe in recipes %}
+      <div class="card">
+        <img src="{{recipe['img_url']}}" style="width:40%" />
+        <div class ="container">
+          <h4> {{recipe['name']}}</h4>
+          <p>{{recipe['recipe_url']}}</p>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    <div class='footer'>
+      <p>Presented By: Team Saucy</p>  <i class="fas fa-fire"></i>
+    </div>
 </body>
 
 </html>

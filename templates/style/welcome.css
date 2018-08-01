@@ -1,5 +1,5 @@
 body{
-  font-family: Ubuntu;
+  font-family: Helvetica;
   margin: 0;
   text-align: center;
 }
@@ -56,6 +56,7 @@ form.search::after{
   padding: 14px 16px;
   text-decoration: none;
   font-size: 17px;
+  font-family: Helvetica;
 }
 .navbar a:hover{
   background: #ddd;
@@ -74,4 +75,15 @@ form.search::after{
   background-color: black;
   color: white;
   text-align: center;
+}
+.card{
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  width: 100px;
+}
+.card: hover{
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+.container{
+  padding: 2px 16px;
 }
