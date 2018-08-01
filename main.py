@@ -38,9 +38,9 @@ class WelcomePage(webapp2.RequestHandler):
         # logout_text = "Logout"
         #recipe API
         global APP_ID
-        APP_ID = ""
+        APP_ID = "6c9dcc56"
         global APP_KEY
-        APP_KEY = ""
+        APP_KEY = "2171ca578b523dffd8daf196002342e2"
         urlfetch.set_default_fetch_deadline(60) #this sets the deadline
         url=("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist").replace(" ", "")) + "&number=5&ranking=2")
         print url
@@ -48,9 +48,10 @@ class WelcomePage(webapp2.RequestHandler):
               # url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
               url,
               headers={
+                "X-Mashape-Key": "DomnZY3cOZmshkfgl4Z3KOudQ0Vnp1S2NaKjsnSZUDpWRwTxBz",
+                "X-Mashape-Host": "spoonacular-crecipe-food-nutrition-v1.p.mashape.com",
               },)
         print url
-
         recipe_list = json.loads(result.content)
         #print recipe_list #parses json
         all_recipe_names = []
