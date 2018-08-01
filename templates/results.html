@@ -11,13 +11,13 @@
 <body>
   <div class="navbar">
     <a href="/main">  <i class="fas fa-home"></i> Home</a>
-    <a href="{{logout_url}}"> <i class="far fa-user-circle"></i>  Log Out</a>
+    <a href="{{logout_url}}"> <i class="far fa-user"></i>  Log Out</a>
   </div>
+  <br />
+  <br />
     <h1>What's cookin?</h1>
     <br />
     <div class="main">
-
-
       <h3>What do you have in your fridge?</h3>
         <form class="search" action="/" method="POST" style="margin:auto;max-width:500px"/>
           <input type = "text" placeholder = "Search..." name = "foodlist"/>
@@ -28,7 +28,7 @@
       <!-- <h2 id="input_"> {{line1}} </h2> -->
       {% for recipe in recipes %}
       <div class="card">
-        <img src="{{recipe['img_url']}}" style="width:40%" />
+        <img src="{{recipe['img_url']}}" style="width:80%" />
         <div class ="container">
           <h4> {{recipe['name']}}</h4>
           <p>{{recipe['recipe_url']}}</p>

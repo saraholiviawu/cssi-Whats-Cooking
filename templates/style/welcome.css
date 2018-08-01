@@ -2,6 +2,7 @@ body{
   font-family: Helvetica;
   margin: 0;
   text-align: center;
+  height: 100%;
 }
 h1{
   color:#80ff9f;
@@ -65,7 +66,7 @@ form.search::after{
 .main{
   padding: 16px;
   margin-top: 30px;
-  height: 1500px;
+  height: 150px;
 }
 .footer{
   position: fixed;
