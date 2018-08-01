@@ -30,7 +30,7 @@ class WelcomePage(webapp2.RequestHandler):
         global APP_ID
         APP_ID = SECRETS_DICT['api-id1']
         global APP_KEY
-        APP_KEY = SECRETS_DICT["api-key1"]
+        APP_KEY = "84103e81ef614ae430c3bc458d36ff16"
         urlfetch.set_default_fetch_deadline(60) #this sets the deadline
         url=("https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist").replace(" ", "")) + "&number=5&ranking=2")
         print url
