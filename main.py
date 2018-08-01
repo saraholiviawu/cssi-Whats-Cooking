@@ -133,8 +133,7 @@ class ResultsPage(webapp2.RequestHandler):
               # url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
               url,
               headers={
-                "X-Mashape-Key": "DomnZY3cOZmshkfgl4Z3KOudQ0Vnp1S2NaKjsnSZUDpWRwTxBz",
-                "X-Mashape-Host": "spoonacular-crecipe-food-nutrition-v1.p.mashape.com",
+                "X-Mashape-Key": "",
               },)
         print url
 
@@ -183,8 +182,8 @@ class ResultsPage(webapp2.RequestHandler):
 
                       url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=" + urllib.quote(self.request.get("foodlist")) + "&number=5&ranking=1",
                       headers={
-                        "X-Mashape-Key": "DomnZY3cOZmshkfgl4Z3KOudQ0Vnp1S2NaKjsnSZUDpWRwTxBz",
-                        "X-Mashape-Host": "spoonacular-crecipe-food-nutrition-v1.p.mashape.com",
+                        "X-Mashape-Key": "",
+                        "X-Mashape-Host": "-crecipe--nutrition-v1.p.mashape.com",
                       },)
 
                 recipe_list = json.loads(result.content)
