@@ -9,8 +9,6 @@ handlers:
 - url: /.*
   script: main.app
   login: optional
-- url: /stylesheet
-  static_dir: templates/style
 
 libraries:
 - name: jinja2
