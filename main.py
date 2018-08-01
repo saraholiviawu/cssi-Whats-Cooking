@@ -33,6 +33,7 @@ class WelcomePage(webapp2.RequestHandler):
 class MainPage(webapp2.RequestHandler):
     def get(self):
         template_var = {}
+        global user
         user = users.get_current_user()
         if user:
             nickname = user.nickname()
@@ -46,7 +47,7 @@ class MainPage(webapp2.RequestHandler):
             #     pass
             # else: WIP MAKING SURE YOU CANT REGISTER TWICE BC RN YOU CAN
             global current_user_key
-            current_user_key = user_models.User(user_id=user_id, nickname=nickname).put()
+            current_user_key = user_models.User(user_id=user_id, nickname=nickname, recipes=[]).put()
         else:
             self.redirect('/welcome')
         main_template = jinja_current_directory.get_template('templates/main.html')
@@ -102,14 +103,37 @@ class MainPage(webapp2.RequestHandler):
 
 class FavoritesPage(webapp2.RequestHandler):
     def get(self):
-        recipe_instructions_template = jinja_current_directory.get_template('templates/recipe-instructions.html')
+        recipe_instructions_template = jinja_current_directory.get_template('templates/favorites.html')
         self.response.write(recipe_instructions_template.render())
 
     def post(self):
+        global APP_ID
+        APP_ID = SECRETS_DICT['api-id1']
+        global APP_KEY
+        APP_KEY = "84103e81ef614ae430c3bc458d36ff16"
+        final_recipe_list= []
+        urlfetch.set_default_fetch_deadline(60) #this sets the deadline
+        quoted_recipe = urllib.quote(self.request.get("favoritesearch"))
+        recipe_search_info = urlfetch.fetch("https://api.edamam.com/search?q=" + quoted_recipe + "&app_id=" + APP_ID +"&app_key=" + APP_KEY + "&to=1")
+        print json.loads(recipe_search_info.content)["hits"][0]["recipe"]["url"]
+        results_dict= json.loads(recipe_search_info.content)
+        #print results_dict
+        final_recipe_list.append( {
+            'name': results_dict["q"],
+            'img_url': results_dict["hits"][0]["recipe"]["image"],
+            'recipe_url': results_dict["hits"][0]["recipe"]["url"],
+        })
         user_model_key = user_models.Recipe(
-            title=self.request.get("title"), image=self.request.get("image"),
-            url=self.request.get("url")).put()
-        user_models.User.query().filter(user_models.User.user_id == self.request.get("key")).get().recipes = (user_model_key,)
+            title=final_recipe_list[0]['name'], image=final_recipe_list[0]['img_url'],
+            url=final_recipe_list[0]['recipe_url']).put()
+        current_user = user_models.User.query().filter(user_models.User.user_id == users.get_current_user().user_id()).get()
+        current_user.recipes.append(user_model_key)
+        current_user.put()
+        print user_models.User.query().filter(user_models.User.user_id == users.get_current_user().user_id()).get()
+        recipe_instructions_template = jinja_current_directory.get_template('templates/favorites.html')
+        self.response.write(recipe_instructions_template.render())
+        # user_models.User.query().filter(user_models.User.user_id == self.request.get("key")).get().recipes = (user_model_key,)
+
 
 
 app = webapp2.WSGIApplication([

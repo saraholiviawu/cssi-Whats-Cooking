@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+  <title>what's cookin'?</title>
+
+  <link rel="stylesheet" href="style/welcome.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
+</head>
+<body>
+
+  <div class="navbar">
+    <a href="/main">  <i class="fas fa-home"></i> Home</a>
+
+    <a href="{{logout_url}}"> <i class="fas fa-user-circle"> Log Out</i></a>
+    <!-- ESTEFANIA: pls move the nickname to the other side of the nav bar -->
+
+
+  </div>
+
+    <div class="main">
+      <br />
+      <br />
+      <br />
+          <h1>what's cookin?</h1>
+
+      <br />
+
+      <h3>Add a recipe to your favorites?</h3>
+        <form class="search" action="/favorites" method="POST" style="margin:auto;max-width:500px"/>
+          <input type = "text" placeholder = "Search..." name = "favoritesearch"/>
+          <button type="submit"><i class="fas fa-search" style="color:#99ff99;"></i></button>
+          <br><br><p>List the exact title of the recipe.</p>
+      </div>
+  <div class="footer">
+    <p>Presented By: Team Saucy</p>  <i class="fas fa-fire"></i>
+  </div>
+
+</body>
+
+</html>
