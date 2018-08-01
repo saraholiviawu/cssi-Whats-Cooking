@@ -25,6 +25,8 @@ class WelcomePage(webapp2.RequestHandler):
     def get(self):
         welcome_template = jinja_current_directory.get_template('templates/welcome.html')
         self.response.write(welcome_template.render({'login_url': users.create_login_url('/main')}))
+    def post(self):
+        self.redirect("/main")
 
 class MainPage(webapp2.RequestHandler):
     def get(self):
@@ -101,38 +103,19 @@ class MainPage(webapp2.RequestHandler):
         welcome_template = jinja_current_directory.get_template('templates/results.html')
         self.response.write(welcome_template.render(template_vars))
 
+class FavoritesPage(webapp2.RequestHandler):
+    def get(self):
+        recipe_instructions_template = jinja_current_directory.get_template('templates/recipe-instructions.html')
+        self.response.write(recipe_instructions_template.render())
+    def post(self):
+        user_model_key = user_models.Recipe(
+            title=self.request.get("title"), image=self.request.get("image"),
+            url=self.request.get("url")).put()
+        user_models.User.query().filter(user_models.User.user_id == self.request.get("key")).get().recipes = (user_model_key,)
 
-
-        #recipe API-----------------
-    #     global APP_ID
-    #
-    #     urlfetch.set_default_fetch_deadline(60) #this sets the deadline
-    #     result = urlfetch.fetch( #this goes to the endpoint and grabs the json
-    #           url="https://spoonacular-recipe-food-nutrition-v1.p.mashape.com/recipes/findByIngredients?ingredients=apples%2Cflour%2Csugar&number=5&ranking=1",
-    #           headers={
-    #                           },)
-    #
-    #     recipe_list = json.loads(result.content)
-    #     print recipe_list #parses json
-    #     all_recipe_names = []
-    #     for recipe in recipe_list:
-    #         all_recipe_names.append(recipe["title"])
-    #     print all_recipe_names[0]
-    #     final_recipe_dict = {}
-    #     for recipe in all_recipe_names:
-    #         recipe = urllib.quote(recipe)
-    #         print recipe
-    #         recipe_search_info = urlfetch.fetch("https://api.edamam.com/search?q=" + recipe + "&app_id=" + APP_ID +"&app_key=" + APP_KEY + "&to=1")
-    #         print recipe_search_info.content
-    #
-    #     self.response.write(recipe_search_info.content)
-    # def post(self):
-    #     pass
-    #     template_vars = {
-    #         'input_ingredients': self.request.get('input_ingredients'),
-    #     }
 
 app = webapp2.WSGIApplication([
     ('/', WelcomePage),
     ('/main', MainPage),
+    ('/favorites', FavoritesPage),
 ], debug=True)
