@@ -132,6 +132,13 @@ class FavoritesPage(webapp2.RequestHandler):
         print user_models.User.query().filter(user_models.User.user_id == users.get_current_user().user_id()).get()
         recipe_instructions_template = jinja_current_directory.get_template('templates/favorites.html')
         self.response.write(recipe_instructions_template.render())
+        bool = True
+        for recipes in current_user.recipes:
+            if bool:
+                self.response.write("<br><br><br><br><br><br><br><br><br><br><br>" + '<a href="'+ recipes.get().url + '">' + recipes.get().title + "</a> ")
+                bool = False
+            else:
+                self.response.write('<a href="'+ recipes.get().url + '">' + recipes.get().title + "</a> ")
         # user_models.User.query().filter(user_models.User.user_id == self.request.get("key")).get().recipes = (user_model_key,)
 
 
